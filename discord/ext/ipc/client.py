@@ -25,6 +25,8 @@ class Client:
     def __init__(self, host="localhost", port=None, multicast_port=20000, secret_key=None):
         """Constructor"""
         self.loop = asyncio.get_event_loop()
+        
+        self.lock = asyncio.Lock()
 
         self.secret_key = secret_key
 
@@ -106,7 +108,8 @@ class Client:
 
         log.debug("Client > %r", payload)
 
-        recv = await self.websocket.receive()
+        async with self.lock:
+            recv = await self.websocket.receive()
 
         log.debug("Client < %r", recv)
 
