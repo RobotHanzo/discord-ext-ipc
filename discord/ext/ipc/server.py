@@ -181,8 +181,7 @@ class Server:
                         self.bot.dispatch("ipc_error", endpoint, error)
 
                         response = {
-                            "error": f"{error}"
-                            ),
+                            "error": str(error),
                             "code": 500,
                         }
 
