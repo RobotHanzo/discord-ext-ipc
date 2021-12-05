@@ -26,7 +26,7 @@ class Client:
         """Constructor"""
         self.loop = asyncio.get_event_loop()
         
-        self.lock = asyncio.Lock()
+        self.lock = asyncio.Lock(loop=loop)
 
         self.secret_key = secret_key
 
